@@ -1,4 +1,7 @@
 *For Razor AHRS v1.4.1*
+
+Tutorial: Building an AHRS Head tracker using the “9DOF Razor IMU” or the “9DOF Sensor Stick” by SparkFun
+
 See the [Changelog](Changelog)
 
 See the [[Intro adff|#intro]]
