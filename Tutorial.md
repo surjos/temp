@@ -1,16 +1,15 @@
-*For Razor AHRS v1.4.1*
+**Building an AHRS using the SparkFun "9DOF Razor IMU" or "9DOF Sensor Stick"**  
+*Razor AHRS v1.4.1* &mdash; *See the [Changelog](Changelog)*
 
-Tutorial: Building an AHRS Head tracker using the “9DOF Razor IMU” or the “9DOF Sensor Stick” by SparkFun
-
-See the [Changelog](Changelog)
-
-See the [Intro adff](#intro)
-
-See the [Intro asdf](Tutorial#intro)
-
-<!-- TODO {{toc}} -->
-<!-- TODO replace all "dev.qu.tu-berlin.de" links -->
-<!-- TODO replace all [[Tutorial#How-to-put-it-together|How to put it together]]-style links -->
+**Contents**
+* [Intro](Tutorial#Intro)
+* [Setting up the hardware](Tutorial#setting-up-the-hardware)
+* [Setting up the software](Tutorial#setting-up-the-software)
+* [Testing the tracker](Tutorial#testing-the-tracker)
+* [Sensor calibration](Tutorial#sensor-calibration)
+* [Using the tracker](Tutorial#using-the-tracker)
+* [Writing your own code to read from the tracker](Tutorial#writing-your-own-code-to-read-from-the-tracker)
+* [Mathematical background and firmware internals](Tutorial#mathematical-background-and-firmware-internals)
 
 Intro
 -----
@@ -28,8 +27,8 @@ Watch a demo video:
 This tutorial will show you how to build a **wired** version of the tracker (connected via **USB**), as well as a **wireless** version (using **Bluetooth**).
 Of course it’s also possible to integrate it into your hardware projects directly by connecting to the `RX`/`TX` pins, e.g. using an [Arduino](http://arduino.cc/) board.
 
-The [Razor AHRS Firmware](https://dev.qu.tu-berlin.de/projects/sf-razor-9dof-ahrs/files) is based on an
-[update](http://groups.google.com/group/sf_9dof_ahrs_update/) of the older [AHRS code](http://code.google.com/p/sf9domahrs/) for a previous version of the *Razor* board. That code didn’t get  updated for newer versions of the board, was a little messy (no offense!) and was also lacking some  features I wanted to have and found necessary - e.g. sensor calibration to improve precision - so I extended and partly rewrote it and decided to make it public.
+The [Razor AHRS Firmware](https://github.com/ptrbrtz/razor-9dof-ahrs) is based on an
+[update](http://groups.google.com/group/sf_9dof_ahrs_update/) of the [older AHRS code](http://code.google.com/p/sf9domahrs/) for a previous version of the *Razor* board. That code didn’t get  updated for newer versions of the board, was a little messy (no offense!) and was also lacking some  features I wanted to have and found necessary - e.g. sensor calibration to improve precision - so I extended and partly rewrote it and decided to make it public.
 
 <!-- TODO links to repo -->
 Improvements over the updated _AHRS code_ currently provided by SparkFun include:
@@ -38,9 +37,9 @@ Improvements over the updated _AHRS code_ currently provided by SparkFun include
 * Serial command interface
 * Easy to understand, setup and extend
 * Outputs correct angles right after start-up, instead of converging slowly
-* [Processing test-sketch](https://dev.qu.tu-berlin.de/projects/sf-razor-9dof-ahrs/files) available
-* [C++ library](https://dev.qu.tu-berlin.de/projects/sf-razor-9dof-ahrs/files) available for Mac OSX, Unix and Linux
-* [Android library](https://dev.qu.tu-berlin.de/projects/sf-razor-9dof-ahrs/files) available for *Android 2.0* and newer
+* [Processing test-sketch](https://github.com/ptrbrtz/razor-9dof-ahrs/tree/master/Processing/Razor_AHRS_test) available
+* [C++ library](https://github.com/ptrbrtz/razor-9dof-ahrs/tree/master/C%2B%2B) available for Mac OSX, Unix and Linux
+* [Android library](https://github.com/ptrbrtz/razor-9dof-ahrs/tree/master/Android) available for *Android 2.0* and newer
 
 Feedback and contributions welcome!
 
@@ -127,12 +126,12 @@ Setting up the software
 
 ### What you need
 
-* Download and unzip the latest *Razor AHRS Firmware* package from the [files page](https://dev.qu.tu-berlin.de/projects/sf-razor-9dof-ahrs/files).
+* TODO Download and unzip the latest *Razor AHRS Firmware* package from the [files page](https://dev.qu.tu-berlin.de/projects/sf-razor-9dof-ahrs/files).
 * Download and install the [Arduino Software](http://arduino.cc/en/Main/Software). We will use it to     upload the firmware and calibrate the sensors.
 
 ### Uploading the firmware
 
-* Even if you want to use *Bluetooth* later on, setup the tracker using *USB* for now (see [[Tutorial\#How-to-put-it-together|How to put it together]]) and connect it to your computer. Uploading does not work via *Bluetooth*.
+* Even if you want to use *Bluetooth* later on, setup the tracker using *USB* for now (see *[How to put it together](Tutorial#how-to-put-it-together)*) and connect it to your computer. Uploading does not work via *Bluetooth*.
 * From your downloaded *Razor AHRS Firmware* package open the file `Arduino/Razor_AHRS/Razor_AHRS.pde` using *Arduino*.
 * In *Arduino*:
     * Have a look at the top of the `Razor_AHRS.pde` file, it contains useful information about the firmware.
@@ -160,8 +159,8 @@ Go ahead and try the commands listed in `Razor_AHRS.pde` by typing them into the
 You can also use the *Processing* test sketch to test the tracker:
 
 * Download and install [Processing](http://processing.org/). We will use it to compile and run the test program.
-    * **NOTE: There seems to be a bug with the serial library in the latest *Processing* versions 1.5 and 1.5.1: "WARNING: RXTX Version mismatch …".** (The previous version 1.2.1 works fine and is still available [here](http://code.google.com/p/processing/downloads/list.))
-* From your downloaded [Razor AHRS Firmware](https://dev.qu.tu-berlin.de/projects/sf-razor-9dof-ahrs/files) package open the file `Processing/Razor_AHRS_test/Razor_AHRS_test.pde` using *Processing*.
+    * **NOTE: There seems to be a bug with the serial library in the latest *Processing* versions 1.5 and 1.5.1: "WARNING: RXTX Version mismatch …".** (The previous version 1.2.1 works fine and is still available [here](http://code.google.com/p/processing/downloads/list)).
+* TODO From your downloaded [Razor AHRS Firmware](https://dev.qu.tu-berlin.de/projects/sf-razor-9dof-ahrs/files) package open the file `Processing/Razor_AHRS_test/Razor_AHRS_test.pde` using *Processing*.
 * In *Processing*:
     * Go to `"Sketch"` and hit `"Run"`.
     * The test sketch should now show the movements of the tracker. If not, have a look at the console at the bottom of the *Processing* code window. It might tell you why it’s not working. Most likely something is wrong with the serial port. At the top of the code you find a description how to set the correct port.
@@ -290,13 +289,13 @@ See `Arduino/Razor_AHRS/Razor_AHRS.pde` for a list of commands and modes _Razor 
 
 ### Using the tracker with Bluetooth
 
-One good thing about using the tracker with *Bluetooth* is, that the board will not be reset when you connect (see [[Tutorial\#About-auto-reset|About auto-reset]]).
+One good thing about using the tracker with *Bluetooth* is, that the board will not be reset when you connect (see *[About auto-reset](Tutorial#about-auto-reset)*).
 
-Another good thing is, that synching (see [[Tutorial\#About-synching|About synching]]) will happen automatically if `OUTPUT__HAS_RN_BLUETOOTH` is set to `true` in `Arduino/Razor_AHRS/Razor_AHRS.pde`. The first byte you receive after connecting definitely belongs to a new *Razor AHRS* output frame. You don’t have to use that, but it makes life easier.
+Another good thing is, that synching (see *[About synching](Tutorial#about-synching)*) will happen automatically if `OUTPUT__HAS_RN_BLUETOOTH` is set to `true` in `Arduino/Razor_AHRS/Razor_AHRS.pde`. The first byte you receive after connecting definitely belongs to a new *Razor AHRS* output frame. You don’t have to use that, but it makes life easier.
 
 In order for this to work you have to do some one-time-setup on the *Bluetooth modem*. If you’re using the *Bluetooth Mate* or a compatible module by *Rovering Networks* it works like this:
 * Upload the file `Arduino/Configure_BT_Dummy/Configure_BT_Dummy.pde` to the *Razor* via *USB* using the *Arduino Software*.
-* Switch the tracker to use *Bluetooth* instead of *USB* (see [[Tutorial\#How-to-put-it-together|How to put it together]]) and     turn it on using the little `ON`/`OFF` switch on the board.
+* Switch the tracker to use *Bluetooth* instead of *USB* (see *[How to put it together](Tutorial#how-to-put-it-together)*) and turn it on using the little `ON`/`OFF` switch on the board.
 * Create a virtual serial port for the *Bluetooth modem*. How you do it depends on your OS, on Mac OSX you do via the *Bluetooth Preferences*. The default PIN of the modem very likely is `0000` or `1234`.
 * In *Arduino* set the *Serial Port* to the one you just created.
 * Switch the *Razor* `OFF` and `ON` again to restart the *Bluetooth modem*.
@@ -320,11 +319,11 @@ Keep in mind that *Bluetooth* almost never works full 100% like it should (at le
 
 ### Using the tracker with Bluetooth on Android
 
-There is a library and a test app to use *Razor AHRS* with *Android*. Find it on the [files page](http://dev.qu.tu-berlin.de/projects/sf-razor-9dof-ahrs/files).
+There is a library and a test app on how to use *Razor AHRS* with *Android*. TODO Find it on the [files page](http://dev.qu.tu-berlin.de/projects/sf-razor-9dof-ahrs/files).
 
 &nbsp;&nbsp;&nbsp;&nbsp;![](images/Razor_AHRS_Android_Screenshot.png)
 
-Everything said in the [[Tutorial#Using-the-tracker-with-Bluetooth|previous section]] of course also applies when using the _Razor_ with _Bluetooth_ on *_Android_*. But _Bluetooth_ seems to be even more picky on _Android_ than it is anyway, so be prepared that it sometimes just won't connect for no apparent reason. Waiting a bit and retrying mostly helps. If not, switch _Bluetooth_ off and on again in the Android system settings and/or reset your _Bluetooth modem_ by power-cycling it. Maybe also wait a bit before trying to connect again, so _Bluetooth_ can do it's magic. How well it actually works really differs from device to device.
+Everything said in the [previous section](Tutorial#using-the-tracker-with-Bluetooth) of course also applies when using the _Razor_ with _Bluetooth_ on *_Android_*. But _Bluetooth_ seems to be even more picky on _Android_ than it is anyway, so be prepared that it sometimes just won't connect for no apparent reason. Waiting a bit and retrying mostly helps. If not, switch _Bluetooth_ off and on again in the Android system settings and/or reset your _Bluetooth modem_ by power-cycling it. Maybe also wait a bit before trying to connect again, so _Bluetooth_ can do it's magic. How well it actually works really differs from device to device.
 
 On the devices tested it seemed necessary that the _Razor_ is not sending data when not connected (meaning streaming output disabled, _Stat LED_ off). Otherwise connections get reset right away. Most likely this has
 something to do with internal buffering. Try this:
@@ -342,11 +341,11 @@ Writing your own code to read from the tracker
 
 ### About synching
 
-When you use the *Razor AHRS* in binary [[Tutorial\#Commands-modes-and-start-up-defaults|output mode]] and the board does not auto-reset (see next section) on connect, you can not tell where one output frame (yaw/pitch/roll) ends and the next one starts. That is because you tune in to the stream at a random position. Just send a synch request, e.g. `#s12` to the *Razor* and it will reply with the synch token `#SYNCH12\r\n`. After that starts a new output frame. This mechanism is used in the *Processing* test sketch and the [C++ and Android libraries:https://dev.qu.tu-berlin.de/projects/sf-razor-9dof-ahrs/files.
+When you use the *Razor AHRS* in binary [output mode](Tutorial#commands-modes-and-start-up-defaults) and the board does not auto-reset (see next section) on connect, you can not tell where one output frame (yaw/pitch/roll) ends and the next one starts. That is because you tune in to the stream at a random position. Just send a synch request, e.g. `#s12` to the *Razor* and it will reply with the synch token `#SYNCH12\r\n`. After that starts a new output frame. This mechanism is used in the *Processing* test sketch and the TODO [C++ and Android libraries](https://dev.qu.tu-berlin.de/projects/sf-razor-9dof-ahrs/files).
 
 ### About auto-reset
 
-Like most of the *Arduino* boards, the *Razor* has an auto-reset feature, which allows the *Arduino Software* to reset the board via *USB* using the *DTR* line. That way you don’t have to press the reset button every time you upload a program to the board. The dark side of this is, that it will also cause a reset every time software on your computer opens a serial connection to the board via *USB*, thus every time restarting the *Razor AHRS Firmware*. More details about the auto-reset feature can be found”here“:www.arduino.cc/en/Main/ArduinoBoardProMini (see section "Automatic Reset").
+Like most of the *Arduino* boards, the *Razor* has an auto-reset feature, which allows the *Arduino Software* to reset the board via *USB* using the *DTR* line. That way you don’t have to press the reset button every time you upload a program to the board. The dark side of this is, that it will also cause a reset every time software on your computer opens a serial connection to the board via *USB*, thus every time restarting the *Razor AHRS Firmware*. More details about the auto-reset feature can be found [here](http://www.arduino.cc/en/Main/ArduinoBoardProMini) (see section "Automatic Reset").
 
 Auto-reset does not happen when connecting via *Bluetooth*.
 
@@ -372,7 +371,7 @@ time after power-up, your commands will get lost. You have these options:
     The easy way is to wait a long-enough time (3 seconds should be ok) after opening the serial port until you send your commands to the *Razor* (for the sake of simplicity, that is what I did in the *Processing* test sketch).
 
     The more complicated but much faster way is to send synch requests to the *Razor* in 200ms intervals until it answers. We then know we’re heard and can send our actual commands (to make it work with every
-setup, that’s what I did in the [C++ and Android libraries](https://dev.qu.tu-berlin.de/projects/sf-razor-9dof-ahrs/files)).
+setup, that’s what I did in the TODO [C++ and Android libraries](https://dev.qu.tu-berlin.de/projects/sf-razor-9dof-ahrs/files)).
     * **Pro**: universal: works with *USB* and *Bluetooth*, works with binary and text output mode, no need to rely on any firmware defaults.
     * **Con**: harder to code than the other options.
 
@@ -387,7 +386,7 @@ Internally the fusion of accelerometer, magnetometer and gyroscope data is done 
 
 ### Sensor calibration
 
-Based on the calibration measurements you compile into the firmware (see [[Tutorial\#Sensor-calibration|Sensor calibration]]), the firmware tries to compensate all three sensors for:
+Based on the calibration measurements you compile into the firmware (see *[Sensor calibration](Tutorial#sensor-calibration)*), the firmware tries to compensate all three sensors for:
 * wrongly scaled sensor axes: e.g. if the accelerometer x-axis measures 200 units, whereas the accelerometer y-axis measures 230 units with the same force applied. All three axes per sensor should be consistent.
 * zero offsets: e.g. if any of the gyroscope axes reports something different than zero when the board is not moving.
 
