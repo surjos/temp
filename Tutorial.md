@@ -24,13 +24,13 @@ Watch a demo video:
 
 [![Vimeo demo video](tutorial/Demo_video.png)](http://vimeo.com/32898673)
 
-This tutorial will show you how to build a **wired** version of the tracker (connected via **USB**), as well as a **wireless** version (using **Bluetooth**).
+The tutorial will show you how to build a **wired** version of the tracker (connected via **USB**), as well as a **wireless** version (using **Bluetooth**).
 Of course it’s also possible to integrate it into your hardware projects directly by connecting to the `RX`/`TX` pins, e.g. using an [Arduino](http://arduino.cc/) board.
 
-The [Razor AHRS Firmware](https://github.com/ptrbrtz/razor-9dof-ahrs) is based on an
+This [Razor AHRS Firmware](https://github.com/ptrbrtz/razor-9dof-ahrs) is based on an
 [update](http://groups.google.com/group/sf_9dof_ahrs_update/) of the [older AHRS code](http://code.google.com/p/sf9domahrs/) for a previous version of the *Razor* board. That code didn’t get  updated for newer versions of the board, was a little messy (no offense!) and was also lacking some  features I wanted to have and found necessary - e.g. sensor calibration to improve precision - so I extended and partly rewrote it and decided to make it public.
 
-<!-- TODO links to repo -->
+<!-- TODO links to downloads instead of repo? -->
 Improvements over the updated _AHRS code_ currently provided by SparkFun include:
 * Much better performance due to sensor calibration
 * Binary and text output modes
@@ -208,7 +208,7 @@ It might be good to power up the *Razor* a few minutes before calibration, so th
 2. **Calibrating the magnetometer**:
     * This time you can shake the board as much as you want, but move it away from magnetic distortions introduced by computers and other electronic devices and metal objects.
     * We’re still *calibration mode* for the accelerometer. Send `#on`, which will move calibration to the **next** sensor, which is the magnetometer.
-    * **NOTE:** *This section stays here for reference, but you should use the newer TODO (link to extended magnetometer calibration) (see next section) as it yields much better results! You can skip this and continue with the gyroscope.*
+    * **NOTE:** *This section stays here for reference, but you should use the newer "Extended magnetometer calibration (see [next section](Tutorial#extended-magnetometer-calibration)) as it yields much better results! You can skip this and continue with the gyroscope.*
     * We'll try to find the minimum and maximum output values for the earth magnetic field on each axis. This basically works like calibrating the accelerometer, except the magnetic field of the earth does not point down straight. Depending on where on the planet you currently are, it points north-and-up (southern hemisphere) or north-and-down (northern hemisphere) at a certain angle. This angle is called *inclination*. Additionally there might be a tiny deviation from true geographic north, which is called *declination*. See [Wikipedia](http://en.wikipedia.org/wiki/Earth_magnetic_field). The following description assumes you’re calibrating the magnetometer on the northern hemisphere.
     * Hold the board flat like a compass with the x-axis (remember: x-axis = forward, towards the connector holes) pointing north. Then begin to rotate the board around the east-west axis so it starts pointing down. Observe the x-maximum (the second value) in the *Serial Monitor* and you will notice when you aligned the board’s x-axis with the magnetic field of the earth. Stop rotating there and again tilt a little in every direction until the value does not get bigger any more.
     * Do the same thing for the opposite side to get the x-minimum: first point north, then down.
@@ -242,8 +242,8 @@ The standard magnetometer calibration only compensates for *hard iron* errors, w
 
 * In a mostly undistorted environment this could look something like this:
 
-    TODO
-    ![]({width:660px}Hard_and_Soft_Iron_Calibration_1a.png)
+    <img src="tutorial/Hard_and_Soft_Iron_Calibration_1a.png" style="width: 660px;" alt=""/>
+
 * Hit `SPACE` and watch the *Processing* console - you’ll find some lines of code that you have to put into the firmware under `"USER SETUP AREA"` / `"SENSOR CALIBRATION"` and you’re done.
 
 The collected data (the dots) are also written to a file `magnetom.float` in the sketch folder. Now in case you own Matlab, under `Matlab/magnetometer_calibration` you’ll find a script called `magnetometer_calibration.m` that uses this file and produces some plots for you, so you can visually check the calibration.
@@ -323,7 +323,7 @@ There is a library and a test app on how to use *Razor AHRS* with *Android*. TOD
 
 &nbsp;&nbsp;&nbsp;&nbsp;![](images/Razor_AHRS_Android_Screenshot.png)
 
-Everything said in the [previous section](Tutorial#using-the-tracker-with-Bluetooth) of course also applies when using the _Razor_ with _Bluetooth_ on *_Android_*. But _Bluetooth_ seems to be even more picky on _Android_ than it is anyway, so be prepared that it sometimes just won't connect for no apparent reason. Waiting a bit and retrying mostly helps. If not, switch _Bluetooth_ off and on again in the Android system settings and/or reset your _Bluetooth modem_ by power-cycling it. Maybe also wait a bit before trying to connect again, so _Bluetooth_ can do it's magic. How well it actually works really differs from device to device.
+Everything said in the [previous section](Tutorial#using-the-tracker-with-bluetooth) of course also applies when using the _Razor_ with _Bluetooth_ on *_Android_*. But _Bluetooth_ seems to be even more picky on _Android_ than it is anyway, so be prepared that it sometimes just won't connect for no apparent reason. Waiting a bit and retrying mostly helps. If not, switch _Bluetooth_ off and on again in the Android system settings and/or reset your _Bluetooth modem_ by power-cycling it. Maybe also wait a bit before trying to connect again, so _Bluetooth_ can do it's magic. How well it actually works really differs from device to device.
 
 On the devices tested it seemed necessary that the _Razor_ is not sending data when not connected (meaning streaming output disabled, _Stat LED_ off). Otherwise connections get reset right away. Most likely this has
 something to do with internal buffering. Try this:
