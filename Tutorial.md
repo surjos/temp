@@ -1,8 +1,8 @@
 **Building an AHRS using the SparkFun "9DOF Razor IMU" or "9DOF Sensor Stick"**  
-*Razor AHRS v1.4.1* &mdash; *See the [Changelog](Changelog)*
+Razor AHRS v1.4.1 &mdash; *See the [Changelog](Changelog)*
 
 **Contents**
-* [Intro](Tutorial#Intro)
+* [Intro](Tutorial#intro)
 * [Setting up the hardware](Tutorial#setting-up-the-hardware)
 * [Setting up the software](Tutorial#setting-up-the-software)
 * [Testing the tracker](Tutorial#testing-the-tracker)
