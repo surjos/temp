@@ -250,30 +250,25 @@ The collected data (the dots) are also written to a file `magnetom.float` in the
 
 Ellipsoid fit and corrected values:
 
-TODO
-&nbsp;&nbsp;&nbsp;&nbsp;!{width:480px}Hard_and_Soft_Iron_Calibration_1b.png! !{width:480px}Hard_and_Soft_Iron_Calibration_1c.png!
+&nbsp;&nbsp;&nbsp;&nbsp;![](tutorial/Hard_and_Soft_Iron_Calibration_1b.png) ![](tutorial/Hard_and_Soft_Iron_Calibration_1c.png)
 
 #### Another calibration example: Soft iron gives a sphere scaled and distorted into an ellipsoid.
 
 * Sampled raw magnetometer values:
 
-    TODO
-    !{width:660px}Hard_and_Soft_Iron_Calibration_2a.png!
+    ![](tutorial/Hard_and_Soft_Iron_Calibration_2a.png)
 * Ellipsoid fit and corrected values:
 
-    TODO
-    !{width:480px}Hard_and_Soft_Iron_Calibration_2b.png! !width:480px}Hard_and_Soft_Iron_Calibration_2c.png!
+    ![](tutorial/Hard_and_Soft_Iron_Calibration_2b.png) ![](tutorial/Hard_and_Soft_Iron_Calibration_2c.png)
 
 #### Another calibration example: Hard iron gives an offset sphere.
 
 * Sampled raw magnetometer values:
 
-    TODO
-    !{width:660px}Hard_and_Soft_Iron_Calibration_3a.png!
+    ![](tutorial/Hard_and_Soft_Iron_Calibration_3a.png)
 * Ellipsoid fit and corrected values:
 
-    TODO
-    !{width:480px}Hard_and_Soft_Iron_Calibration_3b.png! !{width:480px}Hard_and_Soft_Iron_Calibration_3c.png!
+    ![](tutorial/Hard_and_Soft_Iron_Calibration_3b.png) ![](tutorial/Hard_and_Soft_Iron_Calibration_3c.png)
 
 Using the tracker
 -----------------
@@ -321,7 +316,7 @@ Keep in mind that *Bluetooth* almost never works full 100% like it should (at le
 
 There is a library and a test app on how to use *Razor AHRS* with *Android*. TODO Find it on the [files page](http://dev.qu.tu-berlin.de/projects/sf-razor-9dof-ahrs/files).
 
-&nbsp;&nbsp;&nbsp;&nbsp;![](images/Razor_AHRS_Android_Screenshot.png)
+&nbsp;&nbsp;&nbsp;&nbsp;![](tutorial/Razor_AHRS_Android_Screenshot.png)
 
 Everything said in the [previous section](Tutorial#using-the-tracker-with-bluetooth) of course also applies when using the _Razor_ with _Bluetooth_ on *_Android_*. But _Bluetooth_ seems to be even more picky on _Android_ than it is anyway, so be prepared that it sometimes just won't connect for no apparent reason. Waiting a bit and retrying mostly helps. If not, switch _Bluetooth_ off and on again in the Android system settings and/or reset your _Bluetooth modem_ by power-cycling it. Maybe also wait a bit before trying to connect again, so _Bluetooth_ can do it's magic. How well it actually works really differs from device to device.
 
