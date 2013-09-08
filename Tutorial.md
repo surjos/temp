@@ -4,9 +4,9 @@ Tutorial: Building an AHRS Head tracker using the “9DOF Razor IMU” or the �
 
 See the [Changelog](Changelog)
 
-See the [[Intro adff|#intro]]
+See the [Intro adff](#intro)
 
-See the [[Intro asdf|Tutorial#intro]]
+See the [Intro asdf](Tutorial#intro)
 
 <!-- TODO {{toc}} -->
 <!-- TODO replace all "dev.qu.tu-berlin.de" links -->
