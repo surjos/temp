@@ -18,7 +18,7 @@ Intro
 * Robots
 * UAVs and autonomous vehicles
 * Image stabilization systems
-* Head-tracking, e.g. for binaural audio applications (the [SoundScapeRenderer](https://dev.qu.tu-berlin.de/projects/ssr) - a spatial audio reproduction tool - has *Razor AHRS* support built in)
+* Head-tracking, e.g. for binaural audio applications (the [SoundScapeRenderer](http://spatialaudio.net/ssr/) - a spatial audio reproduction tool - has *Razor AHRS* support built in)
 
 Watch a demo video:
 
