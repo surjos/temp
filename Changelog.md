@@ -1,3 +1,9 @@
+#### Razor AHRS v1.4.2
+
+Updated firmware to be Arduino 1.x compatible and sketches to be Processing 2.x compatible.
+Added ability to read plain sensor data of all 9 axes to Android library.
+Fixed namespace issues in C++ library.
+
 #### Razor AHRS v1.4.1
 
 Additionally to magnetometer hard iron error compensation, Razor AHRS now also supports soft iron error compensation. Both compensations only work in the case of the hard/soft iron moving with the sensor - meaning not changing it's position relative to the sensors. Calibration is still static: it's done once and then being hardcoded into the firmware. Have a look at the new tutorial section about extended magnetometer calibration.
