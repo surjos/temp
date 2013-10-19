@@ -1,7 +1,7 @@
 **Building an AHRS using the SparkFun "9DOF Razor IMU" or "9DOF Sensor Stick"**  
 Razor AHRS v1.4.2 &mdash; *See the [Changelog](Changelog)*
 
-**Contents**
+**Overview**
 * [Intro](Tutorial#intro)
 * [Setting up the hardware](Tutorial#setting-up-the-hardware)
 * [Setting up the software](Tutorial#setting-up-the-software)
@@ -18,7 +18,7 @@ Intro
 * Robots
 * UAVs and autonomous vehicles
 * Image stabilization systems
-* Head-tracking, e.g. for binaural audio applications (the [SoundScapeRenderer](https://dev.qu.tu-berlin.de/projects/ssr) - a spatial audio reproduction tool - has *Razor AHRS* support built in)
+* Head-tracking, e.g. for binaural audio applications (the [SoundScapeRenderer](http://spatialaudio.net/ssr/) - a spatial audio reproduction tool - has *Razor AHRS* support built in)
 
 Watch a demo video:
 
@@ -30,7 +30,6 @@ Of course it’s also possible to integrate it into your hardware projects direc
 This [Razor AHRS Firmware](https://github.com/ptrbrtz/razor-9dof-ahrs) is based on an
 [update](http://groups.google.com/group/sf_9dof_ahrs_update/) of the [older AHRS code](http://code.google.com/p/sf9domahrs/) for a previous version of the *Razor* board. That code didn’t get  updated for newer versions of the board, was a little messy (no offense!) and was also lacking some  features I wanted to have and found necessary - e.g. sensor calibration to improve precision - so I extended and partly rewrote it and decided to make it public.
 
-<!-- TODO links to downloads instead of repo? -->
 Improvements over the updated _AHRS code_ currently provided by SparkFun include:
 * Much better performance due to sensor calibration
 * Binary and text output modes
@@ -41,7 +40,7 @@ Improvements over the updated _AHRS code_ currently provided by SparkFun include
 * [C++ library](https://github.com/ptrbrtz/razor-9dof-ahrs/tree/master/C%2B%2B) available for Mac OSX, Unix and Linux
 * [Android library](https://github.com/ptrbrtz/razor-9dof-ahrs/tree/master/Android) available for *Android 2.0* and newer
 
-Feedback and contributions welcome!
+Feedback and contributions welcome: https://github.com/ptrbrtz/razor-9dof-ahrs
 
 Setting up the hardware
 -----------------------
@@ -83,6 +82,12 @@ All the links posted point to the US SparkFun site which is a greatplace to look
 
 1. Assembling the **wired** tracker using the ***9DOF Razor IMU*** is pretty simple:
 
+    Depending on your _jumper wire_ having male or female connectors, solder some *pin headers* to the *FTDI* connectors on the *Razor* board like this:
+
+    ![](tutorial/Razor_FTDI_Pins.jpg)
+
+    Now connect the *FTDI Breakout* and the *Razor*. The I/O header layout of the *FTDI Breakout* matches the header layout of the *Razor* (but connect GND to GND of course).
+
         FTDI BREAKOUT <--> RAZOR
         GND           <--> GND
         CTS           <--> CTS
@@ -91,7 +96,8 @@ All the links posted point to the US SparkFun site which is a greatplace to look
         RXI           <--> TXO
         DTR           <--> DTR
 
-    ![](tutorial/USB_Wiring.jpg)  
+    ![](tutorial/USB_Wiring.jpg)
+
     (The *FTDI Breakout* says 5V, but it’s actually outputting 3.3V - I used the jumper on the backside to change it)
 
 2. Assembling the **wireless** version is also pretty simple:
@@ -126,7 +132,7 @@ Setting up the software
 
 ### What you need
 
-* TODO Download and unzip the latest *Razor AHRS Firmware* package from the [files page](https://dev.qu.tu-berlin.de/projects/sf-razor-9dof-ahrs/files).
+* Clone or download and unzip the latest *Razor AHRS Firmware* from [GitHub](https://github.com/ptrbrtz/razor-9dof-ahrs).
 * Download and install the [Arduino Software](http://arduino.cc/en/Main/Software). We will use it to     upload the firmware and calibrate the sensors.
 
 ### Uploading the firmware
@@ -160,7 +166,7 @@ You can also use the *Processing* test sketch to test the tracker:
 
 * Download and install [Processing](http://processing.org/). We will use it to compile and run the test program.
     * **NOTE: There seems to be a bug with the serial library in the latest *Processing* versions 1.5 and 1.5.1: "WARNING: RXTX Version mismatch …".** (The previous version 1.2.1 works fine and is still available [here](http://code.google.com/p/processing/downloads/list)).
-* TODO From your downloaded [Razor AHRS Firmware](https://dev.qu.tu-berlin.de/projects/sf-razor-9dof-ahrs/files) package open the file `Processing/Razor_AHRS_test/Razor_AHRS_test.pde` using *Processing*.
+* From your downloaded [Razor AHRS Firmware](https://github.com/ptrbrtz/razor-9dof-ahrs) open the file `Processing/Razor_AHRS_test/Razor_AHRS_test.pde` using *Processing*.
 * In *Processing*:
     * Go to `"Sketch"` and hit `"Run"`.
     * The test sketch should now show the movements of the tracker. If not, have a look at the console at the bottom of the *Processing* code window. It might tell you why it’s not working. Most likely something is wrong with the serial port. At the top of the code you find a description how to set the correct port.
@@ -170,13 +176,11 @@ You can also use the *Processing* test sketch to test the tracker:
 Sensor calibration
 ------------------
 
-Depending on how good or bad your sensors are, precision and responsiveness of *Razor AHRS* can be improved a lot by calibrating the sensors.  
-If not calibrated you may get effects like
+Depending on how good or bad your sensors are, precision and responsiveness of *Razor AHRS* can be improved a lot by calibrating the sensors. If not calibrated you may get effects like
 * drifts in *yaw* when you apply *roll* to the board.
 * pointing *up* does not really result in an *up* attitude.
 
-You have to know that the definition of the axes differs from what is printed on the board.  
-The firmware uses
+You have to know that the definition of the axes differs from what is printed on the board. The firmware uses
 * X axis pointing forward (towards the short edge with the connector holes)
 * Y axis pointing to the right
 * Z axis pointing down
@@ -250,30 +254,25 @@ The collected data (the dots) are also written to a file `magnetom.float` in the
 
 Ellipsoid fit and corrected values:
 
-TODO
-&nbsp;&nbsp;&nbsp;&nbsp;!{width:480px}Hard_and_Soft_Iron_Calibration_1b.png! !{width:480px}Hard_and_Soft_Iron_Calibration_1c.png!
+&nbsp;&nbsp;&nbsp;&nbsp;![](tutorial/Hard_and_Soft_Iron_Calibration_1b.png) ![](tutorial/Hard_and_Soft_Iron_Calibration_1c.png)
 
 #### Another calibration example: Soft iron gives a sphere scaled and distorted into an ellipsoid.
 
 * Sampled raw magnetometer values:
 
-    TODO
-    !{width:660px}Hard_and_Soft_Iron_Calibration_2a.png!
+    ![](tutorial/Hard_and_Soft_Iron_Calibration_2a.png)
 * Ellipsoid fit and corrected values:
 
-    TODO
-    !{width:480px}Hard_and_Soft_Iron_Calibration_2b.png! !width:480px}Hard_and_Soft_Iron_Calibration_2c.png!
+    ![](tutorial/Hard_and_Soft_Iron_Calibration_2b.png) ![](tutorial/Hard_and_Soft_Iron_Calibration_2c.png)
 
 #### Another calibration example: Hard iron gives an offset sphere.
 
 * Sampled raw magnetometer values:
 
-    TODO
-    !{width:660px}Hard_and_Soft_Iron_Calibration_3a.png!
+    ![](tutorial/Hard_and_Soft_Iron_Calibration_3a.png)
 * Ellipsoid fit and corrected values:
 
-    TODO
-    !{width:480px}Hard_and_Soft_Iron_Calibration_3b.png! !{width:480px}Hard_and_Soft_Iron_Calibration_3c.png!
+    ![](tutorial/Hard_and_Soft_Iron_Calibration_3b.png) ![](tutorial/Hard_and_Soft_Iron_Calibration_3c.png)
 
 Using the tracker
 -----------------
@@ -319,9 +318,9 @@ Keep in mind that *Bluetooth* almost never works full 100% like it should (at le
 
 ### Using the tracker with Bluetooth on Android
 
-There is a library and a test app on how to use *Razor AHRS* with *Android*. TODO Find it on the [files page](http://dev.qu.tu-berlin.de/projects/sf-razor-9dof-ahrs/files).
+There is a library and a test app on how to use *Razor AHRS* with *Android* in the `Android/` subdirectory.
 
-&nbsp;&nbsp;&nbsp;&nbsp;![](images/Razor_AHRS_Android_Screenshot.png)
+&nbsp;&nbsp;&nbsp;&nbsp;![](tutorial/Razor_AHRS_Android_Screenshot.png)
 
 Everything said in the [previous section](Tutorial#using-the-tracker-with-bluetooth) of course also applies when using the _Razor_ with _Bluetooth_ on *_Android_*. But _Bluetooth_ seems to be even more picky on _Android_ than it is anyway, so be prepared that it sometimes just won't connect for no apparent reason. Waiting a bit and retrying mostly helps. If not, switch _Bluetooth_ off and on again in the Android system settings and/or reset your _Bluetooth modem_ by power-cycling it. Maybe also wait a bit before trying to connect again, so _Bluetooth_ can do it's magic. How well it actually works really differs from device to device.
 
@@ -341,7 +340,7 @@ Writing your own code to read from the tracker
 
 ### About synching
 
-When you use the *Razor AHRS* in binary [output mode](Tutorial#commands-modes-and-start-up-defaults) and the board does not auto-reset (see next section) on connect, you can not tell where one output frame (yaw/pitch/roll) ends and the next one starts. That is because you tune in to the stream at a random position. Just send a synch request, e.g. `#s12` to the *Razor* and it will reply with the synch token `#SYNCH12\r\n`. After that starts a new output frame. This mechanism is used in the *Processing* test sketch and the TODO [C++ and Android libraries](https://dev.qu.tu-berlin.de/projects/sf-razor-9dof-ahrs/files).
+When you use the *Razor AHRS* in binary [output mode](Tutorial#commands-modes-and-start-up-defaults) and the board does not auto-reset (see next section) on connect, you can not tell where one output frame (yaw/pitch/roll) ends and the next one starts. That is because you tune in to the stream at a random position. Just send a synch request, e.g. `#s12` to the *Razor* and it will reply with the synch token `#SYNCH12\r\n`. After that starts a new output frame. This mechanism is used in the *Processing* test sketch and the *C++* and *Android libraries*.
 
 ### About auto-reset
 
@@ -371,7 +370,7 @@ time after power-up, your commands will get lost. You have these options:
     The easy way is to wait a long-enough time (3 seconds should be ok) after opening the serial port until you send your commands to the *Razor* (for the sake of simplicity, that is what I did in the *Processing* test sketch).
 
     The more complicated but much faster way is to send synch requests to the *Razor* in 200ms intervals until it answers. We then know we’re heard and can send our actual commands (to make it work with every
-setup, that’s what I did in the TODO [C++ and Android libraries](https://dev.qu.tu-berlin.de/projects/sf-razor-9dof-ahrs/files)).
+setup, that’s what I did in the *C++* and *Android libraries*).
     * **Pro**: universal: works with *USB* and *Bluetooth*, works with binary and text output mode, no need to rely on any firmware defaults.
     * **Con**: harder to code than the other options.
 
@@ -405,5 +404,3 @@ Currently the calibration compensates for *hard* and *soft iron* errors, where t
 * * * * *
 
 [![](tutorial/CC_License.png)](http://creativecommons.org/licenses/by-nc-sa/3.0/) This Tutorial is licensed under a [Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License](http://creativecommons.org/licenses/by-nc-sa/3.0/). The code is licensed under [GPLv3](http://www.gnu.org/copyleft/gpl.html).
-
-* * * * *
