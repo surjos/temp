@@ -1,5 +1,5 @@
 **Building an AHRS using the SparkFun "9DOF Razor IMU" or "9DOF Sensor Stick"**  
-Razor AHRS v1.4.1 &mdash; *See the [Changelog](Changelog)*
+Razor AHRS v1.4.2 &mdash; *See the [Changelog](Changelog)*
 
 **Contents**
 * [Intro](Tutorial#intro)
@@ -132,9 +132,9 @@ Setting up the software
 ### Uploading the firmware
 
 * Even if you want to use *Bluetooth* later on, setup the tracker using *USB* for now (see *[How to put it together](Tutorial#how-to-put-it-together)*) and connect it to your computer. Uploading does not work via *Bluetooth*.
-* From your downloaded *Razor AHRS Firmware* package open the file `Arduino/Razor_AHRS/Razor_AHRS.pde` using *Arduino*.
+* From your downloaded *Razor AHRS Firmware* package open the file `Arduino/Razor_AHRS/Razor_AHRS.ino` using *Arduino*.
 * In *Arduino*:
-    * Have a look at the top of the `Razor_AHRS.pde` file, it contains useful information about the firmware.
+    * Have a look at the top of the `Razor_AHRS.ino` file, it contains useful information about the firmware.
     * Also there is a section labeled `"USER SETUP AREA"` where you can set some firmware defaults.
         * **You have to select the hardware you are using under `"HARDWARE OPTIONS"`!**
     * Go to `"Tools"` &rarr; `"Board"` and select the board you are using. If you have a *9DOF Razor IMU*, select `"Arduino Pro or Pro Mini (3.3v, 8mhz) w/ATmega328"`.
@@ -150,7 +150,7 @@ To test by staring at numbers, bring up the *Serial Monitor* of *Arduino* under 
 
 ![](tutorial/Serial-Monitor.png)
 
-Go ahead and try the commands listed in `Razor_AHRS.pde` by typing them into the edit box at the top of the *Serial Monitor*. For example you can switch to binary output by sending `#ob` and should see something like  this:
+Go ahead and try the commands listed in `Razor_AHRS.ino` by typing them into the edit box at the top of the *Serial Monitor*. For example you can switch to binary output by sending `#ob` and should see something like  this:
 
 ![](tutorial/Serial-Monitor-2.png)
 
@@ -186,7 +186,7 @@ which gives a right-handed coordinate system.
 ### Standard calibration
 
 It might be good to power up the *Razor* a few minutes before calibration, so the sensors can warm up.   Calibrating the sensors the first time can be a little tricky, but let’s go:
-* Open `Arduino/Razor_AHRS/Razor_AHRS.pde` using *Arduino* and find the section `"USER SETUP AREA"` / `"SENSOR CALIBRATION"`. This is where you put the calibration values later.
+* Open `Arduino/Razor_AHRS/Razor_AHRS.ino` using *Arduino* and find the section `"USER SETUP AREA"` / `"SENSOR CALIBRATION"`. This is where you put the calibration values later.
 * Connect the *Razor AHRS* to your computer, set the correct serial port in *Arduino* and open the *Serial Monitor*.
 * If you didn’t change the firmware defaults, you should see lots of output like this:
 
@@ -203,7 +203,7 @@ It might be good to power up the *Razor* a few minutes before calibration, so th
     * Do the same thing for the opposite side (x-axis pointing up) to get the x-minimum: bring into position, send `#oc` to reset measurement, find x-minimum value and write it down.
     * Do the same thing for the z-axis (down and up) and the y-axis (right and left).
         * If you think you messed up the measurement by shaking or moving the board too fast, you can always reset by sending `#oc`.
-    * You should now have all the min/max values. Put them into `Razor_AHRS.pde`.
+    * You should now have all the min/max values. Put them into `Razor_AHRS.ino`.
     * **NOTE**: You have to be really careful when doing this! Even slightly tapping the board with the finger messes up the measurement (try it!) and leads to wrong calibration. Use `#oc` very often and double check your min/max values)
 2. **Calibrating the magnetometer**:
     * This time you can shake the board as much as you want, but move it away from magnetic distortions introduced by computers and other electronic devices and metal objects.
@@ -219,7 +219,7 @@ It might be good to power up the *Razor* a few minutes before calibration, so th
 
             magn x,y,z (min/max) = -564.00/656.00  -585.00/635.00  -550.00/564.00
 
-        Put these values into `Razor_AHRS.pde`.
+        Put these values into `Razor_AHRS.ino`.
 3. **Calibrating the gyroscope**:
     * Lay the *Razor* still on the table.
     * We’re still *calibration mode* for the magnetometer. Send `#on`, which will move calibration to the **next** sensor, which is the gyroscope.
@@ -228,7 +228,7 @@ It might be good to power up the *Razor* a few minutes before calibration, so th
 
             gyro x,y,z (current/average) = -29.00/-27.98  102.00/100.51  -5.00/-5.85
         * If you think you messed up the measurement by shaking or moving the board, you can reset by sending `#oc`.
-    * Take the second values of each pair and put them into `Razor_AHRS.pde`.
+    * Take the second values of each pair and put them into `Razor_AHRS.ino`.
 
 * Done :)
 
@@ -280,7 +280,7 @@ Using the tracker
 
 ### Commands, modes and start-up defaults
 
-See `Arduino/Razor_AHRS/Razor_AHRS.pde` for a list of commands and modes _Razor AHRS_ understands, as well as other useful information. You can also set some firmware parameters there, e.g. the default output modes.
+See `Arduino/Razor_AHRS/Razor_AHRS.ino` for a list of commands and modes _Razor AHRS_ understands, as well as other useful information. You can also set some firmware parameters there, e.g. the default output modes.
 
 ### Hints and known bugs
 
@@ -291,10 +291,10 @@ See `Arduino/Razor_AHRS/Razor_AHRS.pde` for a list of commands and modes _Razor 
 
 One good thing about using the tracker with *Bluetooth* is, that the board will not be reset when you connect (see *[About auto-reset](Tutorial#about-auto-reset)*).
 
-Another good thing is, that synching (see *[About synching](Tutorial#about-synching)*) will happen automatically if `OUTPUT__HAS_RN_BLUETOOTH` is set to `true` in `Arduino/Razor_AHRS/Razor_AHRS.pde`. The first byte you receive after connecting definitely belongs to a new *Razor AHRS* output frame. You don’t have to use that, but it makes life easier.
+Another good thing is, that synching (see *[About synching](Tutorial#about-synching)*) will happen automatically if `OUTPUT__HAS_RN_BLUETOOTH` is set to `true` in `Arduino/Razor_AHRS/Razor_AHRS.ino`. The first byte you receive after connecting definitely belongs to a new *Razor AHRS* output frame. You don’t have to use that, but it makes life easier.
 
 In order for this to work you have to do some one-time-setup on the *Bluetooth modem*. If you’re using the *Bluetooth Mate* or a compatible module by *Rovering Networks* it works like this:
-* Upload the file `Arduino/Configure_BT_Dummy/Configure_BT_Dummy.pde` to the *Razor* via *USB* using the *Arduino Software*.
+* Upload the file `Arduino/Configure_BT_Dummy/Configure_BT_Dummy.ino` to the *Razor* via *USB* using the *Arduino Software*.
 * Switch the tracker to use *Bluetooth* instead of *USB* (see *[How to put it together](Tutorial#how-to-put-it-together)*) and turn it on using the little `ON`/`OFF` switch on the board.
 * Create a virtual serial port for the *Bluetooth modem*. How you do it depends on your OS, on Mac OSX you do via the *Bluetooth Preferences*. The default PIN of the modem very likely is `0000` or `1234`.
 * In *Arduino* set the *Serial Port* to the one you just created.
@@ -310,9 +310,9 @@ In order for this to work you have to do some one-time-setup on the *Bluetooth m
      * TODO: *Latency and power saving options*
 * Send `---` to end configuration
 * Change `"Both NL & CR"` back to the default `"No line ending"`.
-* Close *Serial Monitor*, switch the tracker back to use *USB* (as mentioned before, make sure you also disconnect the battery before connecting the board to your computer) and upload the *Razor AHRS Firmware* from `Arduino/Razor_AHRS/Razor_AHRS.pde` again.
+* Close *Serial Monitor*, switch the tracker back to use *USB* (as mentioned before, make sure you also disconnect the battery before connecting the board to your computer) and upload the *Razor AHRS Firmware* from `Arduino/Razor_AHRS/Razor_AHRS.ino` again.
 
-**NOTE:** These 60 seconds are called ***Config Timer***. Like described above it’s the time frame after power-up in which you can enter *command mode*. I experienced that the modem always drops the connection if you transmit too much data in this kind of "wait mode". This is also the reason why we uploaded `Configure_BT_Dummy.pde`: it has no output.  
+**NOTE:** These 60 seconds are called ***Config Timer***. Like described above it’s the time frame after power-up in which you can enter *command mode*. I experienced that the modem always drops the connection if you transmit too much data in this kind of "wait mode". This is also the reason why we uploaded `Configure_BT_Dummy.ino`: it has no output.  
 This also means that if you’re actually using the tracker, after switching it on you’d have to wait until *Config Timer* is over. You can either wait the full 60 seconds before connecting or change the *Config Timer* to - let’s say 15 seconds - by sending `ST,15` while in *command mode*. Do not make it too short, with 15 seconds you already have to hurry if you want to enter *command mode* next time. Connecting via *Bluetooth* just takes more time than just opening a normal serial port connection.
 
 Keep in mind that *Bluetooth* almost never works full 100% like it should (at least that’s my experience). If you have trouble connecting, switching things off and on again or using another computer with different *Bluetooth* hardware or a different *Bluetooth* stack is definitely worth a try.
@@ -352,7 +352,7 @@ Auto-reset does not happen when connecting via *Bluetooth*.
 Auto-reset is bad, if you want to send commands to the *Razor* right after you connect (most likely because you want to synch and/or set the output mode). Because the on-board *bootloader* is running for a short
 time after power-up, your commands will get lost. You have these options:
 
-1. **Always use auto-reset via _USB_** and set up the firmware defaults in `Arduino/Razor_AHRS/Razor_AHRS.pde` so you don’t have to send any commands at all.
+1. **Always use auto-reset via _USB_** and set up the firmware defaults in `Arduino/Razor_AHRS/Razor_AHRS.ino` so you don’t have to send any commands at all.
     * **Pro**: works with binary and text output.
     * **Con**: relies on hardcoded firmware defaults, relies on auto-reset via *USB*, does not work with *Bluetooth*.
 
@@ -360,7 +360,7 @@ time after power-up, your commands will get lost. You have these options:
     * **Pro**: works with *USB* and *Bluetooth*, no need to rely on firmware defaults.
     * **Con**: you need two cables now: one **with** *DTR* to upload the firmware to the board and one **without** *DTR* to actually use it.
 
-3. **Don’t care if auto-reset happens**, but set up firmware defaults in `Arduino/Razor_AHRS/Razor_AHRS.pde` so you don’t have to send any commands at all. Have to use text output mode.
+3. **Don’t care if auto-reset happens**, but set up firmware defaults in `Arduino/Razor_AHRS/Razor_AHRS.ino` so you don’t have to send any commands at all. Have to use text output mode.
     * **Pro**: works with *USB* and *Bluetooth*, no need for a second no-DTR cable.
     * **Con**: relies on hardcoded firmware defaults, does not work with (faster) binary output mode.
 
