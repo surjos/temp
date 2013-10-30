@@ -133,7 +133,7 @@ Setting up the software
 ### What you need
 
 * Clone or download and unzip the latest *Razor AHRS Firmware* from [GitHub](https://github.com/ptrbrtz/razor-9dof-ahrs).
-* Download and install the [Arduino Software](http://arduino.cc/en/Main/Software). We will use it to     upload the firmware and calibrate the sensors.
+* Download and install the [Arduino Software](http://arduino.cc/en/Main/Software). We will use it to     upload the firmware and calibrate the sensors. Any *Arduino* versions 1.x should work fine, tested with version 1.0.5.
 
 ### Uploading the firmware
 
@@ -164,8 +164,8 @@ Go ahead and try the commands listed in `Razor_AHRS.ino` by typing them into the
 
 You can also use the *Processing* test sketch to test the tracker:
 
-* Download and install [Processing](http://processing.org/). We will use it to compile and run the test program.
-    * **NOTE: There seems to be a bug with the serial library in the latest *Processing* versions 1.5 and 1.5.1: "WARNING: RXTX Version mismatch …".** (The previous version 1.2.1 works fine and is still available [here](http://code.google.com/p/processing/downloads/list)).
+* Download and install [Processing](http://processing.org/). We will use it to compile and run the test program. Any *Processing* versions 2.x should work fine, tested with version 2.0.3.
+    * **NOTE: There seems to be a bug with the serial library in *Processing* versions 1.5 and 1.5.1: "WARNING: RXTX Version mismatch …".** (So use a newer version 2.x or get the older 1.2.1, which also works and is still available [here](http://code.google.com/p/processing/downloads/list)).
 * From your downloaded [Razor AHRS Firmware](https://github.com/ptrbrtz/razor-9dof-ahrs) open the file `Processing/Razor_AHRS_test/Razor_AHRS_test.pde` using *Processing*.
 * In *Processing*:
     * Go to `"Sketch"` and hit `"Run"`.
