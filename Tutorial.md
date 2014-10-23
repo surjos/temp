@@ -133,7 +133,7 @@ Setting up the software
 ### What you need
 
 * Clone or download and unzip the latest *Razor AHRS Firmware* from [GitHub](https://github.com/ptrbrtz/razor-9dof-ahrs).
-* Download and install the [Arduino Software](http://arduino.cc/en/Main/Software). We will use it to     upload the firmware and calibrate the sensors. Any *Arduino* versions 1.x should work fine, tested with version 1.0.5.
+* Download and install the [Arduino Software](http://arduino.cc/en/Main/Software). We will use it to     upload the firmware and calibrate the sensors. Any *Arduino* versions 1.x should work fine, tested with version 1.0.5 and 1.5.8.
 
 ### Uploading the firmware
 
@@ -143,7 +143,7 @@ Setting up the software
     * Have a look at the top of the `Razor_AHRS.ino` file, it contains useful information about the firmware.
     * Also there is a section labeled `"USER SETUP AREA"` where you can set some firmware defaults.
         * **You have to select the hardware you are using under `"HARDWARE OPTIONS"`!**
-    * Go to `"Tools"` &rarr; `"Board"` and select the board you are using. If you have a *9DOF Razor IMU*, select `"Arduino Pro or Pro Mini (3.3v, 8mhz) w/ATmega328"`.
+    * Go to `"Tools"` &rarr; `"Board"` and select the board you are using. If you have a *9DOF Razor IMU*, select `"Arduino Pro or Pro Mini (3.3v, 8mhz) w/ATmega328"`. Note: in Aduino 1.5+, the board menu doesn't allow selecting the voltage/frequency; go to the Processor menu after selecting "Arduino Pro or Pro Mini" and select "ATMega 328 (3.3V, 8Mhz)"
     * Go to `"Tools"` &rarr; `"Serial Port"` and select the port used with the *Razor*. On Mac OSX this is most likely the first in the list. On Windows/Linux that might be different.
     * Go to `"File"` and hit `"Upload to I/O Board"`. After a short while at the bottom of the *Arduino* code window it should say `"Done uploading"`.
 
